@@ -1,0 +1,117 @@
+SQL> create table F_Internship (First_name varchar2(10), Last_name varchar2(10), Age number(2), Gender char (6), Hiredate varchar2(100));
+
+Table created.
+
+SQL> insert into F_internship values ('Ram', 'Singh', 22, 'Male', '01-06-24’);
+
+1 row created.
+
+SQL> insert into F_internship values ('Kamran', 'Nokia', 25, 'Male', '24-06-24’);
+
+1 row created.
+
+SQL> insert into F_internship values ('Sita', 'Singh', 21, 'Female', '21-07-24’);
+
+1 row created.
+
+SQL> insert into F_internship values ('David', 'Miller', 20, 'ale', '84-02-14’);
+
+1 row created.
+
+SQL> insert into F_internship values ('Katrina', 'Kafe', 20, 'Female', '01-02-14’);
+
+1 row created.
+
+SQL> insert into F_internship values ('AB', 'Delivlier', 45, 'Male', '25-02-18');
+
+1 row created.
+SQL> select * from f_internship;
+
+FIRST_NAME LAST_NAME         AGE GENDER HIREDATE
+---------- ---------- ---------- ------ ----------------------------------------------------------------------------------------------------
+Ram        Singh              22 Male   01-06-24
+Kamran     Nokia              25 Male   24-06-24
+Sita       Singh              21 Female 21-07-24
+David      Miller             20 ale    84-02-14
+Katrina    Kafe               20 Female 01-02-14
+AB         Delivlier          45 Male   25-02-18
+
+6 rows selected.
+
+SQL> desc f_internship
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(10)
+ LAST_NAME                                                                                                                  VARCHAR2(10)
+ AGE                                                                                                                        NUMBER(2)
+ GENDER                                                                                                                     CHAR(6)
+ HIREDATE                                                                                                                   VARCHAR2(100)
+
+SQL> update f_internship set Gender = 'Male'
+  2  where first_name = 'David';
+
+1 row updated.
+
+SQL> update f_internship
+  2  set age = 25
+  3  where First_name = 'Katrina';
+
+1 row updated.
+
+SQL> select * from f_internship;
+
+FIRST_NAME LAST_NAME         AGE GENDER HIREDATE
+---------- ---------- ---------- ------ ----------------------------------------------------------------------------------------------------
+Ram        Singh              22 Male   01-06-24
+Sita       Singh              21 Female 21-07-24
+David      Miller             20 Male   84-02-14
+Katrina    Kafe               25 Female 01-02-14
+AB         Delivlier          45 Male   25-02-18
+
+SQL> alter table f_internship rename to Std_info1;
+
+Table altered.
+
+SQL> select * from std_info1;
+
+FIRST_NAME LAST_NAME         AGE GENDER HIREDATE
+---------- ---------- ---------- ------ ----------------------------------------------------------------------------------------------------
+Ram        Singh              22 Male   01-06-24
+Sita       Singh              21 Female 21-07-24
+David      Miller             20 Male   84-02-14
+Katrina    Kafe               25 Female 01-02-14
+AB         Delivlier          45 Male   25-02-18
+
+SQL> delete from std_info1
+  2   where age = 21;
+
+1 row deleted.
+SQL> select * from std_info1;
+
+FIRST_NAME LAST_NAME         AGE GENDER HIREDATE
+---------- ---------- ---------- ------ ----------------------------------------------------------------------------------------------------
+Ram        Singh              22 Male   01-06-24
+Sita       Singh              21 Female 21-07-24
+David      Miller             20 Male   84-02-14
+Katrina    Kafe               25 Female 01-02-14
+AB         Delivlier          45 Male   25-02-18
+
+SQL> select count(first_name) from std_info1;
+
+COUNT(FIRST_NAME)
+-----------------
+                5
+SQL> alter table std_info1
+  2  drop column hiredate;
+
+Table altered.
+
+SQL> select * from std_info1;
+
+FIRST_NAME LAST_NAME         AGE GENDER
+---------- ---------- ---------- ------
+Ram        Singh              22 Male
+Sita       Singh              21 Female
+David      Miller             20 Male
+Katrina    Kafe               25 Female
+AB         Delivlier          45 Male
