@@ -1,0 +1,83 @@
+SQL> create table Tata_Motor (Emp_id int primary key,Name varchar2(10),Salary decimal(10,2),Hiredate date);
+
+Table created.
+
+SQL> insert into tata_motor values (7801,'John',5000,'12-Mar-18');
+
+1 row created.
+
+SQL> insert into tata_motor values (7802,'Messi',7000,'11-April-18');
+
+1 row created.
+
+SQL>  insert into tata_motor values (7803,'Yuraj',6000,'11-April-11');
+
+1 row created.
+
+SQL>  insert into tata_motor values (7804,'Rohit',6000,'11-April-11');
+
+1 row created.
+
+SQL> insert into tata_motor values (7805,'Virat',9000,'01-May-16');
+
+1 row created.
+
+SQL> insert into tata_motor values (7806,'Hardik',9000,'01-May-18');
+
+1 row created.
+
+SQL> select * from tata_motor;
+
+    EMP_ID NAME           SALARY HIREDATE
+---------- ---------- ---------- ---------
+      7801 John             5000 12-MAR-18
+      7802 Messi            7000 11-APR-18
+      7803 Yuraj            6000 11-APR-11
+      7804 Rohit            6000 11-APR-11
+      7805 Virat            9000 01-MAY-16
+      7806 Hardik           9000 01-MAY-18
+
+6 rows selected.
+
+SQL>  --agregate function
+SQL> select count(hiredate) as total_no from tata_motor;
+
+  TOTAL_NO
+----------
+         6
+
+SQL> select sum(salary) as total_sal from tata_motor;
+
+ TOTAL_SAL
+----------
+     42000
+
+SQL> select avg(salary) as avgerage_sal from tata_motor;
+
+AVGERAGE_SAL
+------------
+        7000
+
+SQL> select max(hiredate)as max_hiredate from tata_motor;
+
+MAX_HIRED
+---------
+01-MAY-18
+
+SQL> select min(hiredate) as min_sal from tata_motor;
+
+MIN_SAL
+---------
+11-APR-11
+
+SQL> select variance(salary) as variance from tata_motor;
+
+  VARIANCE
+----------
+   2800000
+
+SQL> select stddev(salary) as standard_dev from tata_motor;
+
+STANDARD_DEV
+------------
+  1673.32005
