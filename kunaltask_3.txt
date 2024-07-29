@@ -1,0 +1,147 @@
+
+SQL> CREATE TABLE employees_new (
+  2      emp_id NUMBER,
+  3      emp_name VARCHAR2(50),
+  4      dept_id NUMBER
+  5  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE departments_new (
+  2      dept_id NUMBER,
+  3      dept_name VARCHAR2(50)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO employees_new (emp_id, emp_name, dept_id) VALUES (101, 'Anna', 1);
+
+1 row created.
+
+SQL> INSERT INTO employees_new (emp_id, emp_name, dept_id) VALUES (102, 'Brian', 2);
+
+1 row created.
+
+SQL> INSERT INTO employees_new (emp_id, emp_name, dept_id) VALUES (103, 'Cara', 3);
+
+1 row created.
+
+SQL> INSERT INTO employees_new (emp_id, emp_name, dept_id) VALUES (104, 'Dan', NULL);
+
+1 row created.
+
+SQL> INSERT INTO employees_new (emp_id, emp_name, dept_id) VALUES (105, 'Ella', 1)
+  2  ;
+
+1 row created.
+
+SQL> INSERT INTO departments_new (dept_id, dept_name) VALUES (1, 'Sales');
+
+1 row created.
+
+SQL> INSERT INTO departments_new (dept_id, dept_name) VALUES (2, 'Support');
+
+1 row created.
+
+SQL> INSERT INTO departments_new (dept_id, dept_name) VALUES (3, 'Engineering');
+
+1 row created.
+
+SQL> INSERT INTO departments_new (dept_id, dept_name) VALUES (4, 'Marketing');
+
+1 row created.
+
+SQL> -- Inner Join
+SQL> SELECT e.emp_id, e.emp_name, d.dept_name
+  2  FROM employees_new e
+  3  INNER JOIN departments_new d
+  4  ON e.dept_id = d.dept_id
+  5  WHERE ROWNUM <= 10;
+
+    EMP_ID EMP_NAME                                           DEPT_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       101 Anna                                               Sales
+       102 Brian                                              Support
+       103 Cara                                               Engineering
+       105 Ella                                               Sales
+
+SQL> SELECT e.emp_id, e.emp_name, d.dept_name
+  2  FROM employees_new e
+  3  LEFT OUTER JOIN departments_new d
+  4  ON e.dept_id = d.dept_id
+  5  WHERE ROWNUM <= 10;
+
+    EMP_ID EMP_NAME                                           DEPT_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       101 Anna                                               Sales
+       105 Ella                                               Sales
+       102 Brian                                              Support
+       103 Cara                                               Engineering
+       104 Dan
+
+SQL> SELECT e.emp_id, e.emp_name, d.dept_name
+  2  FROM employees_new e
+  3  RIGHT OUTER JOIN departments_new d
+  4  ON e.dept_id = d.dept_id
+  5  WHERE ROWNUM <= 10;
+
+    EMP_ID EMP_NAME                                           DEPT_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       101 Anna                                               Sales
+       102 Brian                                              Support
+       103 Cara                                               Engineering
+       105 Ella                                               Sales
+                                                              Marketing
+
+SQL> SELECT e.emp_id, e.emp_name, d.dept_name
+  2  FROM employees_new e
+  3  CROSS JOIN departments_new d
+  4  WHERE ROWNUM <= 10;
+
+    EMP_ID EMP_NAME                                           DEPT_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       101 Anna                                               Sales
+       102 Brian                                              Sales
+       103 Cara                                               Sales
+       104 Dan                                                Sales
+       105 Ella                                               Sales
+       101 Anna                                               Support
+       102 Brian                                              Support
+       103 Cara                                               Support
+       104 Dan                                                Support
+       105 Ella                                               Support
+
+10 rows selected.
+
+SQL> SELECT e.emp_id, e.emp_name, d.dept_name
+  2  FROM employees_new e
+  3  FULL OUTER JOIN departments_new d
+  4  ON e.dept_id = d.dept_id
+  5  WHERE ROWNUM <= 10;
+
+    EMP_ID EMP_NAME                                           DEPT_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       101 Anna                                               Sales
+       102 Brian                                              Support
+       103 Cara                                               Engineering
+       104 Dan
+       105 Ella                                               Sales
+                                                              Marketing
+
+6 rows selected.
+
+SQL> SELECT e1.emp_id AS emp1_id, e1.emp_name AS emp1_name,
+  2         e2.emp_id AS emp2_id, e2.emp_name AS emp2_name,
+  3         e1.dept_id
+  4  FROM employees_new e1
+  5  INNER JOIN employees_new e2
+  6  ON e1.dept_id = e2.dept_id
+  7  WHERE e1.emp_id < e2.emp_id
+  8  AND ROWNUM <= 10;
+
+   EMP1_ID EMP1_NAME                                             EMP2_ID EMP2_NAME                                             DEPT_ID
+---------- -------------------------------------------------- ---------- -------------------------------------------------- ----------
+       101 Anna                                                      105 Ella                                                        1
+
+SQL>
