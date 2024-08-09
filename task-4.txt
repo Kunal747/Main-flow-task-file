@@ -1,0 +1,118 @@
+
+SQL> -- Create the K_1 table
+SQL> CREATE TABLE K_1 (
+  2      DepartmentID NUMBER(4) NOT NULL,                      -- Primary Key Constraint
+  3      DepartmentName VARCHAR2(100) NOT NULL,
+  4      CONSTRAINT pk_DepartmentID PRIMARY KEY (DepartmentID)
+  5  );
+
+Table created.
+
+SQL>
+SQL> -- Create the K_2 table with various constraints
+SQL> CREATE TABLE K_2 (
+  2      EmployeeID NUMBER(6) NOT NULL,                        -- Primary Key Constraint
+  3      FirstName VARCHAR2(50) NOT NULL,                      -- NOT NULL constraint
+  4      LastName VARCHAR2(50) NOT NULL,                       -- NOT NULL constraint
+  5      Email VARCHAR2(100) UNIQUE,                           -- UNIQUE constraint
+  6      HireDate DATE DEFAULT SYSDATE,                        -- DEFAULT constraint
+  7      Salary NUMBER(10, 2) CHECK (Salary > 0),              -- CHECK constraint
+  8      DepartmentID NUMBER(4),                               -- Foreign Key Constraint
+  9      CONSTRAINT pk_EmployeeID PRIMARY KEY (EmployeeID),
+ 10      CONSTRAINT fk_DepartmentID FOREIGN KEY (DepartmentID) REFERENCES K_1(DepartmentID) -- Correct table reference
+ 11  );
+
+Table created.
+
+SQL> -- Insert values into the K_1 table
+SQL> INSERT INTO K_1 (DepartmentID, DepartmentName)
+  2  VALUES
+  3  (1, 'Human Resources');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO K_1 (DepartmentID, DepartmentName)
+  2  VALUES
+  3  (2, 'Finance');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO K_1 (DepartmentID, DepartmentName)
+  2  VALUES
+  3  (3, 'Engineering');
+
+1 row created.
+
+SQL>
+SQL> -- Insert values into the K_2 table
+SQL> INSERT INTO K_2 (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+  2  VALUES
+  3  (1, 'John', 'Doe', 'john.doe@example.com', TO_DATE('2024-08-09', 'YYYY-MM-DD'), 60000, 2);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO K_2 (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+  2  VALUES
+  3  (2, 'Jane', 'Smith', 'jane.smith@example.com', NULL, 70000, 3);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO K_2 (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+  2  VALUES
+  3  (3, 'Alice', 'Johnson', 'alice.johnson@example.com', TO_DATE('2024-07-15', 'YYYY-MM-DD'), 80000, 3);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO K_2 (EmployeeID, FirstName, LastName, Email, HireDate, Salary, DepartmentID)
+  2  VALUES
+  3  (4, 'Bob', 'Brown', 'bob.brown@example.com', NULL, 55000, 1);
+
+1 row created.
+
+SQL> select k_1;
+select k_1
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select  from k_1;
+select  from k_1
+        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from k_1;
+
+DEPARTMENTID DEPARTMENTNAME
+------------ ----------------------------------------------------------------------------------------------------
+           1 Human Resources
+           2 Finance
+           3 Engineering
+
+SQL> select * from k_2;
+
+EMPLOYEEID FIRSTNAME                                          LASTNAME
+---------- -------------------------------------------------- --------------------------------------------------
+EMAIL                                                                                                HIREDATE      SALARY DEPARTMENTID
+---------------------------------------------------------------------------------------------------- --------- ---------- ------------
+         1 John                                               Doe
+john.doe@example.com                                                                                 09-AUG-24      60000            2
+
+         2 Jane                                               Smith
+jane.smith@example.com                                                                                              70000            3
+
+         3 Alice                                              Johnson
+alice.johnson@example.com                                                                            15-JUL-24      80000            3
+
+         4 Bob                                                Brown
+bob.brown@example.com                                                                                               55000            1
+
+
+SQL>
