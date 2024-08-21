@@ -1,0 +1,288 @@
+
+SQL> create table asd as select * from emp;
+
+Table created.
+
+SQL> desc asd
+ Name                                                                         Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPNO                                                                         NUMBER(4)
+ ENAME                                                                         VARCHAR2(10)
+ JOB                                                                           VARCHAR2(9)
+ MGR                                                                           NUMBER(4)
+ HIREDATE                                                                      DATE
+ SAL                                                                           NUMBER(7,2)
+ COMM                                                                          NUMBER(7,2)
+ DEPTNO                                                                        NUMBER(2)
+
+SQL> select * from asd'
+  2
+SQL> select * from asd;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> --1.
+SQL> select * from asd
+  2  order by sal desc offset 1 row fetch next 1 row only;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DOB       GENDER
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------- ----------
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20 01-SEP-67 Female
+
+
+SQL> --2.
+SQL>  select deptno,max(sal) as salary
+  2      from asd
+  3      group by deptno;
+
+    DEPTNO     SALARY
+---------- ----------
+        20       3000
+        30       2850
+        10       5000
+
+SQL> --3.
+SQL> select current_date as currdate from dual;
+
+CURRDATE
+---------
+21-AUG-24
+
+SQL> --4.
+SQL> select case
+  2      when to_date('2024-08-16','YYYY-MM-DD') IS NOT NULL THEN 'Valid Date'
+  3      ELSE 'Invalid Date'
+  4      END AS Result
+  5      FROM DUAL;
+
+RESULT
+------------
+Valid Date
+
+SQL> ALTER TABLE asd ADD (DOB DATE);
+
+Table altered.
+
+SQL> select * from asd;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DOB
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1960-01-05', 'YYYY-MM-DD') WHERE EMPNO = 7369;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1961-03-22', 'YYYY-MM-DD') WHERE EMPNO = 7499;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1962-07-19', 'YYYY-MM-DD') WHERE EMPNO = 7521;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1963-10-30', 'YYYY-MM-DD') WHERE EMPNO = 7566;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1964-12-15', 'YYYY-MM-DD') WHERE EMPNO = 7654;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1965-05-11', 'YYYY-MM-DD') WHERE EMPNO = 7698;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1966-06-08', 'YYYY-MM-DD') WHERE EMPNO = 7782;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1967-09-01', 'YYYY-MM-DD') WHERE EMPNO = 7788;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1968-11-23', 'YYYY-MM-DD') WHERE EMPNO = 7844;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1969-02-14', 'YYYY-MM-DD') WHERE EMPNO = 7876;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1970-04-07', 'YYYY-MM-DD') WHERE EMPNO = 7900;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1971-08-25', 'YYYY-MM-DD') WHERE EMPNO = 7902;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1973-10-17', 'YYYY-MM-DD') WHERE EMPNO = 7839;
+
+1 row updated.
+
+SQL> UPDATE asd SET DOB = TO_DATE('1975-12-31', 'YYYY-MM-DD') WHERE EMPNO = 7934;
+
+1 row updated.
+
+SQL> select distinct ename
+  2  from asd
+  3  where dob between to_date('1960-01-01' 'YYYY-MM-DD') and to_date('1975-12-31','YYYY-MM-DD');
+where dob between to_date('1960-01-01' 'YYYY-MM-DD') and to_date('1975-12-31','YYYY-MM-DD')
+                                       *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select distinct ename
+  2  from asd
+  3* where dob between to_date('1960-01-01','YYYY-MM-DD') and to_date('1975-12-31','YYYY-MM-DD')
+SQL> /
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+SQL> alter table asd add (Gender varchar2(10));
+
+Table altered.
+
+SQL> UPDATE asd
+  2  SET Gender = CASE
+  3      WHEN MOD(EMPNO, 2) = 0 THEN 'Female'
+  4      ELSE 'Male'
+  5  END;
+
+14 rows updated.
+
+SQL> select * from asd;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO DOB       GENDER
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20 05-JAN-60 Male
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30 22-MAR-61 Male
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30 19-JUL-62 Male
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20 30-OCT-63 Female
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30 15-DEC-64 Female
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30 11-MAY-65 Female
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10 08-JUN-66 Female
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20 01-SEP-67 Female
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10 17-OCT-73 Male
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30 23-NOV-68 Female
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20 14-FEB-69 Female
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30 07-APR-70 Female
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20 25-AUG-71 Female
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10 31-DEC-75 Female
+
+14 rows selected.
+
+SQL> select Gender, Count(*) as numberofEmp
+  2  from asd
+  3   where dob between to_date('1960-01-01','YYYY-MM-DD') and to_date('1975-12-31','YYYY-MM-DD')
+  4  group by Gender;
+
+GENDER     NUMBEROFEMP
+---------- -----------
+Male                 4
+Female              10
+
+SQL> select * from asd
+  2  where sal >=10000;
+
+no rows selected
+
+SQL> select ename
+  2  from asd
+  3  where ename like 'M%';
+
+ENAME
+----------
+MARTIN
+MILLER
+
+SQL> select * from asd
+  2  where upper(ename) like '%JOE';
+
+no rows selected
+
+SQL> select * from
+  2  ased
+  3  ed
+  4
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select extract(year from DOB ) As YEarOfBirth
+  2* from asd
+SQL> /
+
+YEAROFBIRTH
+-----------
+       1960
+       1961
+       1962
+       1963
+       1964
+       1965
+       1966
+       1967
+       1973
+       1968
+       1969
+       1970
+       1971
+       1975
+
+14 rows selected.
+
+SQL>
