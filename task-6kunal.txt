@@ -1,0 +1,443 @@
+
+SQL> -- Creating Tata_Customers table
+SQL> CREATE TABLE Tata_Customers (
+  2      CustomerID NUMBER PRIMARY KEY,
+  3      CustomerName VARCHAR2(100),
+  4      City VARCHAR2(50),
+  5      State VARCHAR2(50),
+  6      JoinDate DATE
+  7  );
+
+Table created.
+
+SQL> -- Creating Tata_Products table
+SQL> CREATE TABLE Tata_Products (
+  2      ProductID NUMBER PRIMARY KEY,
+  3      ProductName VARCHAR2(100),
+  4      Category VARCHAR2(50),
+  5      Price NUMBER(10, 2)
+  6  );
+
+Table created.
+
+SQL> -- Creating Tata_Orders table
+SQL> CREATE TABLE Tata_Orders (
+  2      OrderID NUMBER PRIMARY KEY,
+  3      CustomerID NUMBER,
+  4      ProductID NUMBER,
+  5      OrderDate DATE,
+  6      Quantity NUMBER,
+  7      TotalAmount NUMBER(10, 2),
+  8      FOREIGN KEY (CustomerID) REFERENCES Tata_Customers(CustomerID),
+  9      FOREIGN KEY (ProductID) REFERENCES Tata_Products(ProductID)
+ 10  );
+
+Table created.
+
+SQL> -- Inserting data into Tata_Customers
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (1, 'Rahul Sharma', 'Mumbai', 'Maharashtra', TO_DATE('2022-01-15', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (2, 'Anita Verma', 'Delhi', 'Delhi', TO_DATE('2021-05-23', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (3, 'Vikram Singh', 'Bangalore', 'Karnataka', TO_DATE('2020-03-19', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (4, 'Priya Kapoor', 'Chennai', 'Tamil Nadu', TO_DATE('2021-07-05', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (5, 'Amit Mehta', 'Pune', 'Maharashtra', TO_DATE('2019-11-22', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (6, 'Sunita Rao', 'Hyderabad', 'Telangana', TO_DATE('2022-04-11', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (7, 'Ravi Kumar', 'Kolkata', 'West Bengal', TO_DATE('2020-12-15', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (8, 'Manish Gupta', 'Ahmedabad', 'Gujarat', TO_DATE('2021-09-29', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (9, 'Ritu Sharma', 'Lucknow', 'Uttar Pradesh', TO_DATE('2020-06-17', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Customers (CustomerID, CustomerName, City, State, JoinDate)
+  2  VALUES (10, 'Nikhil Joshi', 'Jaipur', 'Rajasthan', TO_DATE('2021-02-14', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> - Inserting data into Tata_Products
+SP2-0734: unknown command beginning "- Insertin..." - rest of line ignored.
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (1, 'Laptop', 'Electronics', 50000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (2, 'Smartphone', 'Electronics', 25000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (3, 'Washing Machine', 'Appliances', 15000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (4, 'Refrigerator', 'Appliances', 20000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (5, 'Air Conditioner', 'Appliances', 35000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (6, 'Headphones', 'Accessories', 2000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (7, 'Smartwatch', 'Electronics', 10000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (8, 'Microwave Oven', 'Appliances', 12000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (9, 'Vacuum Cleaner', 'Appliances', 8000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Products (ProductID, ProductName, Category, Price)
+  2  VALUES (10, 'Bluetooth Speaker', 'Accessories', 3000.00);
+
+1 row created.
+
+SQL> -- Inserting data into Tata_Orders
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (1, 1, 2, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 1, 25000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (2, 2, 1, TO_DATE('2023-02-18', 'YYYY-MM-DD'), 1, 50000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (3, 3, 3, TO_DATE('2023-03-22', 'YYYY-MM-DD'), 2, 30000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (4, 4, 4, TO_DATE('2023-04-10', 'YYYY-MM-DD'), 1, 20000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (5, 5, 5, TO_DATE('2023-05-05', 'YYYY-MM-DD'), 1, 35000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (6, 6, 6, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 2, 4000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (7, 7, 7, TO_DATE('2023-07-18', 'YYYY-MM-DD'), 1, 10000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (8, 8, 8, TO_DATE('2023-08-20', 'YYYY-MM-DD'), 1, 12000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (9, 9, 9, TO_DATE('2023-09-25', 'YYYY-MM-DD'), 1, 8000.00);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Tata_Orders (OrderID, CustomerID, ProductID, OrderDate, Quantity, TotalAmount)
+  2  VALUES (10, 10, 10, TO_DATE('2023-10-29', 'YYYY-MM-DD'), 3, 9000.00);
+
+1 row created.
+
+SQL> -- Query 1: Total number of orders
+SQL> SELECT COUNT(*) AS TotalOrders FROM Tata_Orders;
+
+TOTALORDERS
+-----------
+         10
+
+SQL> -- Query 2: Average order value
+SQL> SELECT AVG(TotalAmount) AS AverageOrderValue FROM Tata_Orders;
+
+AVERAGEORDERVALUE
+-----------------
+            20300
+
+SQL> -- Query 3: Top 5 products by number of orders
+SQL> SELECT p.ProductName, COUNT(o.OrderID) AS NumberOfOrders
+  2  FROM Tata_Orders o
+  3  JOIN Tata_Products p ON o.ProductID = p.ProductID
+  4  GROUP BY p.ProductName
+  5  ORDER BY NumberOfOrders DESC
+  6  FETCH FIRST 5 ROWS ONLY;
+
+PRODUCTNAME                                                                                          NUMBEROFORDERS
+---------------------------------------------------------------------------------------------------- --------------
+Laptop                                                                                                            1
+Smartphone                                                                                                        1
+Air Conditioner                                                                                                   1
+Refrigerator                                                                                                      1
+Washing Machine                                                                                                   1
+
+SQL> -- Query 4: Most frequent customers
+SQL> SELECT c.CustomerName, COUNT(o.OrderID) AS NumberOfOrders
+  2  FROM Tata_Customers c
+  3  JOIN Tata_Orders o ON c.CustomerID = o.CustomerID
+  4  GROUP BY c.CustomerName
+  5  ORDER BY NumberOfOrders DESC;
+
+CUSTOMERNAME                                                                                         NUMBEROFORDERS
+---------------------------------------------------------------------------------------------------- --------------
+Rahul Sharma                                                                                                      1
+Anita Verma                                                                                                       1
+Vikram Singh                                                                                                      1
+Priya Kapoor                                                                                                      1
+Nikhil Joshi                                                                                                      1
+Sunita Rao                                                                                                        1
+Ravi Kumar                                                                                                        1
+Manish Gupta                                                                                                      1
+Ritu Sharma                                                                                                       1
+Amit Mehta                                                                                                        1
+
+10 rows selected.
+
+SQL> -- Query 5: Peak order times
+SQL> SELECT TO_CHAR(OrderDate, 'HH24') AS HourOfDay, COUNT(OrderID) AS NumberOfOrders
+  2  FROM Tata_Orders
+  3  GROUP BY TO_CHAR(OrderDate, 'HH24')
+  4  ORDER BY NumberOfOrders DESC;
+
+HO NUMBEROFORDERS
+-- --------------
+00             10
+
+SQL> select * from tata_products;
+
+ PRODUCTID PRODUCTNAME                                                                                          CATEGORY                                   PRICE
+---------- ---------------------------------------------------------------------------------------------------- -------------------------------------------------- ----------
+         1 Laptop                                                                                               Electronics                                50000
+         2 Smartphone                                                                                           Electronics                                25000
+         3 Washing Machine                                                                                      Appliances                                 15000
+         4 Refrigerator                                                                                         Appliances                                 20000
+         5 Air Conditioner                                                                                      Appliances                                 35000
+         6 Headphones                                                                                           Accessories
+2000
+         7 Smartwatch                                                                                           Electronics                                10000
+         8 Microwave Oven                                                                                       Appliances                                 12000
+         9 Vacuum Cleaner                                                                                       Appliances
+8000
+        10 Bluetooth Speaker                                                                                    Accessories
+3000
+
+10 rows selected.
+
+SQL> select * from tata_customers;
+
+CUSTOMERID CUSTOMERNAME                                                                                         CITY
+---------- ---------------------------------------------------------------------------------------------------- --------------------------------------------------
+STATE                                              JOINDATE
+-------------------------------------------------- ---------
+         1 Rahul Sharma                                                                                         Mumbai
+Maharashtra                                        15-JAN-22
+
+         2 Anita Verma                                                                                          Delhi
+Delhi                                              23-MAY-21
+
+         3 Vikram Singh                                                                                         Bangalore
+Karnataka                                          19-MAR-20
+
+         4 Priya Kapoor                                                                                         Chennai
+Tamil Nadu                                         05-JUL-21
+
+         5 Amit Mehta                                                                                           Pune
+Maharashtra                                        22-NOV-19
+
+         6 Sunita Rao                                                                                           Hyderabad
+Telangana                                          11-APR-22
+
+         7 Ravi Kumar                                                                                           Kolkata
+West Bengal                                        15-DEC-20
+
+         8 Manish Gupta                                                                                         Ahmedabad
+Gujarat                                            29-SEP-21
+
+         9 Ritu Sharma                                                                                          Lucknow
+Uttar Pradesh                                      17-JUN-20
+
+        10 Nikhil Joshi                                                                                         Jaipur
+Rajasthan                                          14-FEB-21
+
+
+10 rows selected.
+
+SQL> select * from tata_orders;
+
+   ORDERID CUSTOMERID  PRODUCTID ORDERDATE   QUANTITY TOTALAMOUNT
+---------- ---------- ---------- --------- ---------- -----------
+         1          1          2 15-JAN-23          1       25000
+         2          2          1 18-FEB-23          1       50000
+         3          3          3 22-MAR-23          2       30000
+         4          4          4 10-APR-23          1       20000
+         5          5          5 05-MAY-23          1       35000
+         6          6          6 15-JUN-23          2        4000
+         7          7          7 18-JUL-23          1       10000
+         8          8          8 20-AUG-23          1       12000
+         9          9          9 25-SEP-23          1        8000
+        10         10         10 29-OCT-23          3        9000
+
+10 rows selected.
+
+SQL> -- Most frequent products bought
+SQL> SELECT ProductName, COUNT(*) AS Frequency
+  2  FROM Tata_Products P, Tata_Orders O
+  3  WHERE P.ProductID = O.ProductID
+  4  GROUP BY ProductName
+  5  ORDER BY Frequency DESC;
+
+PRODUCTNAME                                                                                           FREQUENCY
+---------------------------------------------------------------------------------------------------- ----------
+Smartphone                                                                                                    1
+Laptop                                                                                                        1
+Washing Machine                                                                                               1
+Refrigerator                                                                                                  1
+Bluetooth Speaker                                                                                             1
+Headphones                                                                                                    1
+Smartwatch                                                                                                    1
+Microwave Oven                                                                                                1
+Vacuum Cleaner                                                                                                1
+Air Conditioner                                                                                               1
+
+10 rows selected.
+
+SQL> -- Peak order times (monthly analysis)
+SQL> SELECT TO_CHAR(OrderDate, 'YYYY-MM') AS OrderMonth, COUNT(*) AS OrderCount
+  2  FROM Tata_Orders
+  3  GROUP BY TO_CHAR(OrderDate, 'YYYY-MM')
+  4  ORDER BY OrderCount DESC;
+
+ORDERMO ORDERCOUNT
+------- ----------
+2023-01          1
+2023-02          1
+2023-03          1
+2023-04          1
+2023-10          1
+2023-06          1
+2023-07          1
+2023-08          1
+2023-09          1
+2023-05          1
+
+10 rows selected.
+
+SQL> -- Generate a report of total sales by city
+SQL> SELECT C.City, SUM(O.TotalAmount) AS TotalSales
+  2  FROM Tata_Customers C, Tata_Orders O
+  3  WHERE C.CustomerID = O.CustomerID
+  4  GROUP BY C.City
+  5  ORDER BY TotalSales DESC;
+
+CITY                                               TOTALSALES
+-------------------------------------------------- ----------
+Delhi                                                   50000
+Pune                                                    35000
+Bangalore                                               30000
+Mumbai                                                  25000
+Chennai                                                 20000
+Ahmedabad                                               12000
+Kolkata                                                 10000
+Jaipur                                                   9000
+Lucknow                                                  8000
+Hyderabad                                                4000
+
+10 rows selected.
+
+SQL> -- Generate a report of average order value by customer
+SQL> SELECT C.CustomerName, AVG(O.TotalAmount) AS AverageOrderValue
+  2  FROM Tata_Customers C, Tata_Orders O
+  3  WHERE C.CustomerID = O.CustomerID
+  4  GROUP BY C.CustomerName
+  5  ORDER BY AverageOrderValue DESC;
+
+CUSTOMERNAME                                                                                         AVERAGEORDERVALUE
+---------------------------------------------------------------------------------------------------- -----------------
+Anita Verma                                                                                                      50000
+Amit Mehta                                                                                                       35000
+Vikram Singh                                                                                                     30000
+Rahul Sharma                                                                                                     25000
+Priya Kapoor                                                                                                     20000
+Manish Gupta                                                                                                     12000
+Ravi Kumar                                                                                                       10000
+Nikhil Joshi                                                                                                      9000
+Ritu Sharma                                                                                                       8000
+Sunita Rao                                                                                                        4000
+
+10 rows selected.
+
+SQL>
